@@ -20,7 +20,7 @@ class DetailProductActivity : BaseActivity() {
      */
     private var _binding: ActivityDetailProductBinding? = null
     private val binding get() = _binding!!
-    private var quantity = 0
+    private var quantity = 1
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +84,7 @@ class DetailProductActivity : BaseActivity() {
 
         binding.less.setOnClickListener {
             binding.quantity.text = "$quantity"
-            if(quantity>0){
+            if(quantity>1){
                 quantity--
                 binding.quantity.text = "$quantity"
             }

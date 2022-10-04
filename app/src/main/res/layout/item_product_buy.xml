@@ -31,7 +31,8 @@
             <ImageView
                 android:id="@+id/imageProduct"
                 android:layout_width="0sp"
-                android:layout_height="130sp"
+                android:layout_height="100sp"
+                android:maxHeight="100sp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 card_view:layout_constraintStart_toStartOf="parent"
@@ -51,12 +52,12 @@
                 android:textColor="@color/primary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                card_view:layout_constraintEnd_toStartOf="@+id/textView10"
+                card_view:layout_constraintEnd_toStartOf="@+id/tvQuantity"
                 card_view:layout_constraintStart_toEndOf="@+id/imageProduct"
                 card_view:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvPrice"
                 android:layout_width="0sp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10sp"
@@ -66,7 +67,7 @@
                 android:textColor="#5A5A5A"
                 android:textSize="15sp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
-                card_view:layout_constraintEnd_toStartOf="@+id/textView10"
+                card_view:layout_constraintEnd_toStartOf="@+id/tvQuantity"
                 card_view:layout_constraintStart_toEndOf="@+id/imageProduct" />
 
             <TextView
@@ -78,15 +79,15 @@
                 android:text="FT 150"
                 android:textColor="#373737"
                 android:textSize="15sp"
-                card_view:layout_constraintBottom_toTopOf="@+id/textView"
-                card_view:layout_constraintEnd_toStartOf="@+id/textView10"
+                card_view:layout_constraintBottom_toTopOf="@+id/tvPrice"
+                card_view:layout_constraintEnd_toStartOf="@+id/tvQuantity"
                 card_view:layout_constraintStart_toStartOf="@+id/titleProduct" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/tvQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100"
+                android:text="10"
                 android:textSize="30sp"
                 android:textColor="#5A5A5A"
                 card_view:layout_constraintBottom_toBottomOf="parent"

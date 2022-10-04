@@ -26,7 +26,7 @@ class MainActivity : BaseActivity(){
     private val binding get() = _binding!!
     private var dataList = ArrayList<Product>()
 
-    private lateinit var programsAdapter: ProductAdapter
+    private lateinit var productsAdapter: ProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,12 +104,12 @@ class MainActivity : BaseActivity(){
         }
 
         // Se establece el adaptador y datos para el rv
-        programsAdapter = ProductAdapter(dataList)
-        programsAdapter.submitList(dataList)
-        binding.rvProducts.adapter = programsAdapter
+        productsAdapter = ProductAdapter(dataList)
+        productsAdapter.submitList(dataList)
+        binding.rvProducts.adapter = productsAdapter
 
         //Le damos la funcion de clic a los productos
-        programsAdapter.onItemClick = { product ->
+        productsAdapter.onItemClick = { product ->
             Log.d("TAG", product.name)
             val intent = Intent(this, DetailProductActivity::class.java)
             intent.putExtra("product", product as Serializable)
@@ -162,13 +162,13 @@ class MainActivity : BaseActivity(){
             binding.rvProducts.visibility = View.INVISIBLE
         }else{
             //Se vuelven a establecer el adapter, pero ahora con los nuevos valores
-            programsAdapter.submitList(filteredList)
+            productsAdapter.submitList(filteredList)
 
             // Setting the Adapter with the recyclerview
-            binding.rvProducts.adapter = programsAdapter
+            binding.rvProducts.adapter = productsAdapter
 
             //Se actualiza el recyclerview para actualizar todos los datos
-            programsAdapter.notifyDataSetChanged()
+            productsAdapter.notifyDataSetChanged()
 
             //Si la lista tiene elementos, se muestra el rv
             binding.rvProducts.visibility = View.VISIBLE

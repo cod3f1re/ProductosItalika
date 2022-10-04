@@ -8,33 +8,34 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cod3f1re.productositalika.Model.Product
+import com.cod3f1re.productositalika.Model.ProductBuy
 import com.cod3f1re.productositalika.R
-import com.cod3f1re.productositalika.databinding.ItemProductBinding
+import com.cod3f1re.productositalika.databinding.ItemProductBuyBinding
 
 class ProductBuyAdapter(
-    var productList: MutableList<Product>):
-    ListAdapter<Product, ProductBuyAdapter.BuyProductsViewHolder>(ProgramDiffUtilCallback) {
+    var productList:MutableList<ProductBuy>):
+    ListAdapter<ProductBuy, ProductBuyAdapter.BuyProductsViewHolder>(ProgramDiffUtilCallback) {
 
-    var onItemClick: ((Product) -> Unit)? = null
+    var onItemClick: ((ProductBuy) -> Unit)? = null
 
-    object ProgramDiffUtilCallback : DiffUtil.ItemCallback<Product>() {
+    object ProgramDiffUtilCallback : DiffUtil.ItemCallback<ProductBuy>() {
         override fun areItemsTheSame(
-            oldItem: Product,
-            newItem: Product
+            oldItem: ProductBuy,
+            newItem: ProductBuy
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: Product,
-            newItem: Product
+            oldItem: ProductBuy,
+            newItem: ProductBuy
         ): Boolean {
             return oldItem == newItem
         }
     }
 
     inner class BuyProductsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val binding = ItemProductBinding.bind(itemView)
+        private val binding = ItemProductBuyBinding.bind(itemView)
 
         init {
             binding.cardProduct.setOnClickListener {
@@ -42,7 +43,7 @@ class ProductBuyAdapter(
             }
         }
 
-        fun bind(product: Product) {
+        fun bind(product: ProductBuy) {
             //Se establece una imagen desde internet
             Glide
                 .with(binding.imageProduct.context)
@@ -55,6 +56,9 @@ class ProductBuyAdapter(
             // Se indica el nuevo texto
             binding.titleProduct.text = product.name
 
+            binding.tvQuantity.text = "${product.count}"
+
+            binding.tvPrice.text = "${product.price}"
         }
 
     }
