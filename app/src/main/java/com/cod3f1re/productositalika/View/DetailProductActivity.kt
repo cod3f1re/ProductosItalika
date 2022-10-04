@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.cod3f1re.productositalika.Utils.ModelPreferencesManager
@@ -32,6 +33,9 @@ class DetailProductActivity : BaseActivity() {
 
         val product = intent.getSerializableExtra("product",) as? Product
 
+        //Se verifica si hay productos en el carrito
+        verifyCart()
+
         if (product != null) {
             binding.name.text = product.name
             if(product.image.isNotEmpty()){
@@ -43,6 +47,7 @@ class DetailProductActivity : BaseActivity() {
                     .placeholder(R.drawable.load)
                     .into(binding.image)
             }
+
             binding.price.text = "Precio: $ ${product.price}"
 
             binding.description.text = product.description
@@ -69,6 +74,14 @@ class DetailProductActivity : BaseActivity() {
                 val intent = Intent(this, BuyProductsActivity::class.java)
                 startActivity(intent)
 
+            }
+
+            //Se lleva al carrito de compras
+            binding.tvProductsNumber.setOnClickListener {
+                openCart()
+            }
+            binding.imgCart.setOnClickListener {
+                openCart()
             }
 
         }
@@ -99,12 +112,25 @@ class DetailProductActivity : BaseActivity() {
     override fun onPause() {
         super.onPause()
         //Se verifica si hay productos en el carrito
-        binding.tvProductsNumber.text = "${getProducts()}"
+        verifyCart()
     }
 
     override fun onResume() {
         super.onResume()
         //Se verifica si hay productos en el carrito
-        binding.tvProductsNumber.text = "${getProducts()}"
+        verifyCart()
     }
+
+    fun verifyCart(){
+        if(getProducts()>=1){
+            //Se verifica si hay productos en el carrito
+            binding.tvProductsNumber.text = "${getProducts()}"
+            //Se muestra el carrito de compras
+            binding.tvProductsNumber.visibility = View.VISIBLE
+        }else{
+            //Se oculta el carrito de compras
+            binding.tvProductsNumber.visibility = View.GONE
+        }
+    }
+
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.cod3f1re.productositalika.Model.Product
 import com.cod3f1re.productositalika.Model.ProductBuy
@@ -66,4 +67,20 @@ class BuyProductsActivity : AppCompatActivity() {
 
         }
     }
+
+    fun validateFields(): Boolean{
+        binding.ilEmail.error = null
+        binding.ilPhone.error = null
+        var complete=true
+        if(binding.etEmail.text?.toString() == "" && binding.etEmail.text?.toString()!!.length>=7){
+            binding.ilEmail.error = "Debes de ingresar un correo electronico valido"
+            complete=false
+        }
+        if(binding.etPhone.text?.toString() == "" && binding.etPhone.text?.toString()!!.length>=10){
+            binding.ilPhone.error = "Debes de ingresar un numero celular valido de 10 digitos"
+            complete=false
+        }
+        return complete
+    }
+
 }

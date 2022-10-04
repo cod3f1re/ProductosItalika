@@ -36,9 +36,13 @@ class MainActivity : BaseActivity(){
         setContentView(view)
 
         //Se verifica si hay productos en el carrito
-        binding.tvProductsNumber.text = "${getProducts()}"
+        verifyCart()
 
+        //Se lleva al carrito de compras
         binding.tvProductsNumber.setOnClickListener {
+            openCart()
+        }
+        binding.imgCart.setOnClickListener {
             openCart()
         }
 
@@ -135,14 +139,12 @@ class MainActivity : BaseActivity(){
 
     override fun onPause() {
         super.onPause()
-        //Se verifica si hay productos en el carrito
-        binding.tvProductsNumber.text = "${getProducts()}"
+        verifyCart()
     }
 
     override fun onResume() {
         super.onResume()
-        //Se verifica si hay productos en el carrito
-        binding.tvProductsNumber.text = "${getProducts()}"
+        verifyCart()
     }
 
     /**
@@ -173,8 +175,18 @@ class MainActivity : BaseActivity(){
             //Si la lista tiene elementos, se muestra el rv
             binding.rvProducts.visibility = View.VISIBLE
         }
-
     }
 
 
+    fun verifyCart(){
+        if(getProducts()>=1){
+            //Se verifica si hay productos en el carrito
+            binding.tvProductsNumber.text = "${getProducts()}"
+            //Se muestra el carrito de compras
+            binding.tvProductsNumber.visibility = View.VISIBLE
+        }else{
+            //Se oculta el carrito de compras
+            binding.tvProductsNumber.visibility = View.GONE
+        }
+    }
 }

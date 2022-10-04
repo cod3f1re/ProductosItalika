@@ -7,63 +7,88 @@
     android:background="@color/background"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/logoItalika"
-        android:layout_width="250sp"
-        android:layout_height="90sp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_italika" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="40sp"
-        android:layout_height="40sp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/logoItalika"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/logoItalika"
-        app:srcCompat="@drawable/carrito" />
-
-    <TextView
-        android:id="@+id/tvProductsNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:padding="3sp"
-        android:textSize="11sp"
-        android:textColor="#0F104E"
-        android:textAlignment="center"
-        android:background="@drawable/circular_background"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2" />
-
-    <SearchView
-        android:id="@+id/searchProducts"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="10sp"
-        android:layoutDirection="rtl"
-        android:background="@drawable/search_background"
-        android:layout_marginTop="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoItalika" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvProducts"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ct1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchProducts"
-        android:paddingBottom="150sp"
-        app:spanCount="2"
-        tools:itemCount="14"
-        tools:listitem="@layout/item_product" />
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/logoItalika"
+            android:layout_width="250sp"
+            android:layout_height="90sp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo_italika" />
+        <ImageView
+            android:id="@+id/imgCart"
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/logoItalika"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/logoItalika"
+            app:srcCompat="@drawable/carrito" />
+
+        <TextView
+            android:id="@+id/tvProductsNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:padding="3sp"
+            android:textSize="11sp"
+            android:textColor="#0F104E"
+            android:textAlignment="center"
+            android:background="@drawable/circular_background"
+            app:layout_constraintBottom_toBottomOf="@+id/imgCart"
+            app:layout_constraintEnd_toEndOf="@+id/imgCart" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ct1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ct2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ct1">
+
+            <SearchView
+                android:id="@+id/searchProducts"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="10sp"
+                android:background="@drawable/search_background"
+                android:layoutDirection="rtl"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvProducts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="150sp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/searchProducts"
+                app:spanCount="2"
+                tools:itemCount="14"
+                tools:listitem="@layout/item_product" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
