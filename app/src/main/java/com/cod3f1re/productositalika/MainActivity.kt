@@ -9,11 +9,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.cod3f1re.productositalika.Model.Product
+import com.cod3f1re.productositalika.Utils.BaseActivity
+import com.cod3f1re.productositalika.View.DetailProductActivity
+import com.cod3f1re.productositalika.ViewModel.Adapters.ProductAdapter
 import com.cod3f1re.productositalika.databinding.ActivityMainBinding
 import java.io.Serializable
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : BaseActivity(){
 
     /**
      * inicializa el viewbinding
@@ -31,13 +35,20 @@ class MainActivity : AppCompatActivity(){
         val view = binding.root
         setContentView(view)
 
-        // this creates a vertical layout Manager
-        binding.rvProducts.layoutManager = LinearLayoutManager(this)
+        //Se verifica si hay productos en el carrito
+        binding.tvProductsNumber.text = "${getProducts()}"
+
+        binding.tvProductsNumber.setOnClickListener {
+            openCart()
+        }
+
+        // Se crea el recyclerview en grid
         binding.rvProducts.layoutManager = GridLayoutManager(this,2)
 
         // Bucle para crear varios productos de italika
         for (i in 1..6) {
-            dataList.add(Product(23,"Italika $i",19000,
+            dataList.add(
+                Product(23,"Motocicleta de trabajo, Motocicleta Italika $i AT 125 RT",19000,
                 "Tipo de motor\t4 Tiempos, monocilíndrico\n" +
                         "Cilindrada\t124 CC\n" +
                         "Velocidad máxima\t85 km/h\n" +
@@ -50,12 +61,14 @@ class MainActivity : AppCompatActivity(){
                         "Capacidad de combustible\t3.5 L\n" +
                         "Rendimiento de combustible por tanque\t126 km\n" +
                         "Capacidad de aceite\t.9 L\n" +
-                        "Tipo de enfriamiento\tAire forzado","https://chedrauimx.vtexassets.com/arquivos/ids/7427955/7503031090192_03.jpg?v=637992117580700000"))
+                        "Tipo de enfriamiento\tAire forzado","https://chedrauimx.vtexassets.com/arquivos/ids/7427955/7503031090192_03.jpg?v=637992117580700000")
+            )
         }
 
         // Bucle para crear varios productos de italika
         for (i in 7..15) {
-            dataList.add(Product(23,"Italika $i",23000,
+            dataList.add(
+                Product(23,"Motocicleta de trabajo, Motocicleta Italika $i D125 LT",23000,
                 "Tipo de motor\t4 Tiempos, monocilíndrico\n" +
                         "Cilindrada\t124 CC\n" +
                         "Velocidad máxima\t71 km/h\n" +
@@ -68,12 +81,14 @@ class MainActivity : AppCompatActivity(){
                         "Capacidad de combustible\t5.5 L\n" +
                         "Rendimiento de combustible por tanque\t159.5 km\n" +
                         "Capacidad de aceite\t.8 L\n" +
-                        "Tipo de enfriamiento\tAire forzado","https://www.bicimotos.com.mx/pub/media/catalog/product/cache/1a0ccf9d37918f21e66e749b62550d57/-/a/-a4125210149p-02-1200wx1200h.jpg"))
+                        "Tipo de enfriamiento\tAire forzado","https://www.bicimotos.com.mx/pub/media/catalog/product/cache/1a0ccf9d37918f21e66e749b62550d57/-/a/-a4125210149p-02-1200wx1200h.jpg")
+            )
         }
 
         // Bucle para crear varios productos de italika
         for (i in 16..23) {
-            dataList.add(Product(23,"Italika $i",57000,
+            dataList.add(
+                Product(23,"Motocicleta de estilo deportivo, Motocicleta Italika $i",57000,
                 "Tipo de motor\t4 Tiempos, monocilíndrico OHC\n" +
                         "Cilindrada\t250 CC\n" +
                         "Velocidad máxima\t123 km/h\n" +
@@ -84,7 +99,8 @@ class MainActivity : AppCompatActivity(){
                         "Transmisión Final\tEstándar de 6 velocidades/por cadena\n" +
                         "Capacidad de combustible\t11 L\n" +
                         "Rendimiento de combustible por tanque\t258.5 km\n" +
-                        "Capacidad de aceite\t1.3 L","https://www.italika.mx/WebVisorArchivosITK/Archivo.aspx?Tipo=3&Archivo=WebPortalMexicoITK/img/Modelos/LineaZ/Maxis/250Z.png"))
+                        "Capacidad de aceite\t1.3 L","https://www.italika.mx/WebVisorArchivosITK/Archivo.aspx?Tipo=3&Archivo=WebPortalMexicoITK/img/Modelos/LineaZ/Maxis/250Z.png")
+            )
         }
 
         // Se establece el adaptador y datos para el rv
@@ -115,9 +131,19 @@ class MainActivity : AppCompatActivity(){
 
         })
 
-
     }
 
+    override fun onPause() {
+        super.onPause()
+        //Se verifica si hay productos en el carrito
+        binding.tvProductsNumber.text = "${getProducts()}"
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //Se verifica si hay productos en el carrito
+        binding.tvProductsNumber.text = "${getProducts()}"
+    }
 
     /**
      * Metodo para cambiar los datos dell rv mostrado

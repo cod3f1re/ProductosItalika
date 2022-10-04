@@ -1,14 +1,20 @@
-package com.cod3f1re.productositalika
+package com.cod3f1re.productositalika.View
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
+import com.cod3f1re.productositalika.Utils.ModelPreferencesManager
+import com.cod3f1re.productositalika.Model.Product
+import com.cod3f1re.productositalika.Model.ProductBuy
+import com.cod3f1re.productositalika.Model.ProductsSelected
+import com.cod3f1re.productositalika.R
+import com.cod3f1re.productositalika.Utils.BaseActivity
 import com.cod3f1re.productositalika.databinding.ActivityDetailProductBinding
-import com.cod3f1re.productositalika.databinding.ActivityMainBinding
 
-class DetailProductActivity : AppCompatActivity() {
+class DetailProductActivity : BaseActivity() {
     /**
      * inicializa el viewbinding
      */
@@ -38,29 +44,32 @@ class DetailProductActivity : AppCompatActivity() {
                     .into(binding.image)
             }
             binding.price.text = "Precio: $ ${product.price}"
+
             binding.description.text = product.description
 
             binding.btnComprar.setOnClickListener{
+
                 ModelPreferencesManager.with(this)
 
-                val productsSaved: ProductsSelected? = ModelPreferencesManager.get<ProductsSelected>("ProductsSelected")
+                val productsSaved: ProductsSelected? =
+                    ModelPreferencesManager.get<ProductsSelected>("ProductsSelected")
 
                 if(productsSaved!=null){
-                    productsSaved?.products?.add(product)
+                    //Se crea un nuevo objeto para mayor control y manipulacion, pero agregandole ahora la cantidad de elementos de ese producto
+                    productsSaved?.products?.add(ProductBuy(product.id,product.name,product.price,product.description,product.image,quantity))
                     ModelPreferencesManager.put(productsSaved, "ProductsSelected")
                 }else{
-                    var productsActually: ArrayList<Product> = ArrayList()
-                    productsActually.add(product)
+                    var productsActually: ArrayList<ProductBuy> = ArrayList()
+                    //Se crea un nuevo objeto para mayor control y manipulacion, pero agregandole ahora la cantidad de elementos de ese producto
+                    productsActually.add(ProductBuy(product.id,product.name,product.price,product.description,product.image,quantity))
                     val productsSaved = ProductsSelected(productsActually)
-                    ModelPreferencesManager.put(productsSaved,"ProductsSelected")
+                    ModelPreferencesManager.put(productsSaved, "ProductsSelected")
                 }
 
+                val intent = Intent(this, BuyProductsActivity::class.java)
+                startActivity(intent)
+
             }
-
-
-
-
-
 
         }
 
@@ -81,9 +90,21 @@ class DetailProductActivity : AppCompatActivity() {
             }
         }
 
+        binding.tvProductsNumber.setOnClickListener {
+            openCart()
+        }
+    }
 
 
+    override fun onPause() {
+        super.onPause()
+        //Se verifica si hay productos en el carrito
+        binding.tvProductsNumber.text = "${getProducts()}"
+    }
 
-
+    override fun onResume() {
+        super.onResume()
+        //Se verifica si hay productos en el carrito
+        binding.tvProductsNumber.text = "${getProducts()}"
     }
 }

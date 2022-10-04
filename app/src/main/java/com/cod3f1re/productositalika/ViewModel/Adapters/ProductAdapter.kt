@@ -1,4 +1,4 @@
-package com.cod3f1re.productositalika
+package com.cod3f1re.productositalika.ViewModel.Adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.cod3f1re.productositalika.Model.Product
+import com.cod3f1re.productositalika.R
 import com.cod3f1re.productositalika.databinding.ItemProductBinding
 
 class ProductAdapter(
     var productList: MutableList<Product>):
-    ListAdapter<Product, ProductAdapter.ProgramsViewHolder>(ProgramDiffUtilCallback) {
+    ListAdapter<Product, ProductAdapter.ProductsViewHolder>(ProgramDiffUtilCallback) {
 
     var onItemClick: ((Product) -> Unit)? = null
 
@@ -31,7 +33,7 @@ class ProductAdapter(
         }
     }
 
-    inner class ProgramsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ProductsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemProductBinding.bind(itemView)
 
         init {
@@ -46,7 +48,7 @@ class ProductAdapter(
                 .with(binding.imageProduct.context)
                 .load(product.image)
                 .centerCrop()
-                .override(100,100)
+                .override(200,200)
                 .placeholder(R.drawable.load)
                 .into(binding.imageProduct)
 
@@ -57,13 +59,13 @@ class ProductAdapter(
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProgramsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_product, parent, false)
-        return ProgramsViewHolder(view)
+        return ProductsViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ProgramsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
         val product=getItem(position)
         holder.bind(product)
     }

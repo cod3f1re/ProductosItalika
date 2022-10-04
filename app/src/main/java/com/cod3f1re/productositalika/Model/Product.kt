@@ -1,4 +1,4 @@
-package com.cod3f1re.productositalika
+package com.cod3f1re.productositalika.Model
 
 import java.io.Serializable
 

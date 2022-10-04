@@ -1,6 +1,5 @@
-package com.cod3f1re.productositalika
+package com.cod3f1re.productositalika.Utils
 
-import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity

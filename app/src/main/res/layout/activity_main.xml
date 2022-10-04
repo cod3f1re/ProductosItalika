@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background"
     tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/logoItalika"
         android:layout_width="250sp"
-        android:layout_height="80sp"
+        android:layout_height="90sp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,11 +29,11 @@
         app:srcCompat="@drawable/carrito" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tvProductsNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
-        android:paddingTop="1sp"
+        android:padding="3sp"
         android:textSize="11sp"
         android:textColor="#0F104E"
         android:textAlignment="center"
