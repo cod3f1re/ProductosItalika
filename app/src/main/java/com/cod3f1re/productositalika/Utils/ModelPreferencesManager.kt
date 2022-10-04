@@ -13,7 +13,7 @@ object ModelPreferencesManager {
 
     lateinit var preferences: SharedPreferences
 
-    private const val PREFERENCES_FILE_NAME = "PREFERENCES_FILE_NAME"
+    private const val PREFERENCES_FILE_NAME = "PREFERENCES_ITALIKA"
 
     fun with(application: AppCompatActivity) {
         preferences = application.getSharedPreferences(

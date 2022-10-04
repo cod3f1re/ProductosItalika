@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.cod3f1re.productositalika.Utils.ModelPreferencesManager
@@ -22,6 +23,8 @@ class DetailProductActivity : BaseActivity() {
     private var _binding: ActivityDetailProductBinding? = null
     private val binding get() = _binding!!
     private var quantity = 1
+
+    private var cartProducts: Boolean = false
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,10 +81,18 @@ class DetailProductActivity : BaseActivity() {
 
             //Se lleva al carrito de compras
             binding.tvProductsNumber.setOnClickListener {
-                openCart()
+                if(cartProducts){
+                    openCart()
+                }else{
+                    Toast.makeText(this, "Aun no tienes ningun producto agregado", Toast.LENGTH_SHORT).show()
+                }
             }
             binding.imgCart.setOnClickListener {
-                openCart()
+                if(cartProducts){
+                    openCart()
+                }else{
+                    Toast.makeText(this, "Aun no tienes ningun producto agregado", Toast.LENGTH_SHORT).show()
+                }
             }
 
         }
@@ -127,9 +138,11 @@ class DetailProductActivity : BaseActivity() {
             binding.tvProductsNumber.text = "${getProducts()}"
             //Se muestra el carrito de compras
             binding.tvProductsNumber.visibility = View.VISIBLE
+            cartProducts = true
         }else{
             //Se oculta el carrito de compras
             binding.tvProductsNumber.visibility = View.GONE
+            cartProducts = false
         }
     }
 

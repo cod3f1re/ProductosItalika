@@ -18,7 +18,7 @@
 
         <ImageView
             android:id="@+id/logoItalika"
-            android:layout_width="250sp"
+            android:layout_width="220sp"
             android:layout_height="90sp"
             android:adjustViewBounds="true"
             android:scaleType="fitXY"
@@ -49,6 +49,18 @@
             app:layout_constraintBottom_toBottomOf="@+id/imgCart"
             app:layout_constraintEnd_toEndOf="@+id/imgCart" />
 
+
+        <SearchView
+            android:id="@+id/searchProducts"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10sp"
+            android:background="@drawable/search_background"
+            android:layoutDirection="rtl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logoItalika" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -66,26 +78,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ct1">
 
-            <SearchView
-                android:id="@+id/searchProducts"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="10sp"
-                android:background="@drawable/search_background"
-                android:layoutDirection="rtl"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvProducts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:paddingBottom="150sp"
+                android:layout_marginTop="10sp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchProducts"
+                app:layout_constraintTop_toTopOf="parent"
                 app:spanCount="2"
                 tools:itemCount="14"
                 tools:listitem="@layout/item_product" />

@@ -28,6 +28,8 @@ class MainActivity : BaseActivity(){
 
     private lateinit var productsAdapter: ProductAdapter
 
+    private var cartProducts: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,10 +42,18 @@ class MainActivity : BaseActivity(){
 
         //Se lleva al carrito de compras
         binding.tvProductsNumber.setOnClickListener {
-            openCart()
+            if(cartProducts){
+                openCart()
+            }else{
+                Toast.makeText(this, "Aun no tienes ningun producto agregado", Toast.LENGTH_SHORT).show()
+            }
         }
         binding.imgCart.setOnClickListener {
-            openCart()
+            if(cartProducts){
+                openCart()
+            }else{
+                Toast.makeText(this, "Aun no tienes ningun producto agregado", Toast.LENGTH_SHORT).show()
+            }
         }
 
         // Se crea el recyclerview en grid
@@ -184,9 +194,11 @@ class MainActivity : BaseActivity(){
             binding.tvProductsNumber.text = "${getProducts()}"
             //Se muestra el carrito de compras
             binding.tvProductsNumber.visibility = View.VISIBLE
+            cartProducts = true
         }else{
             //Se oculta el carrito de compras
             binding.tvProductsNumber.visibility = View.GONE
+            cartProducts = false
         }
     }
 }
